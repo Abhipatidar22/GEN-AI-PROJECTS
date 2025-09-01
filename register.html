@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Register</h2>
+<form method="post" class="card form">
+  <label>Name</label>
+  <input type="text" name="name" required>
+  <label>Email</label>
+  <input type="email" name="email" required placeholder="you@example.com">
+  <label>Password</label>
+  <input type="password" name="password" required>
+  <label>Age</label>
+  <input type="number" name="age" min="10" max="100">
+  <label>Profession</label>
+  <input type="text" name="profession" placeholder="Student, Developer, ...">
+  <button class="btn" type="submit">Create account</button>
+</form>
+{% endblock %}

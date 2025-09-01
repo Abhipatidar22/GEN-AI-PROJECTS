@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hero">
+  <h2>Your pocket-sized life coach</h2>
+  <p>Track moods, journal, set goals, and get smart nudges—privately, on your device.</p>
+  {% if not session.get('user_id') %}
+  <div class="cta">
+    <a class="btn" href="{{ url_for('login') }}">Login</a>
+    <a class="btn btn-secondary" href="{{ url_for('register') }}">Register</a>
+  </div>
+  <p class="demo">Or use demo credentials: <code>demo@coach.app</code> / <code>demo123</code></p>
+  {% else %}
+  <a class="btn" href="{{ url_for('dashboard') }}">Go to Dashboard</a>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<div class="grid">
+  <div class="card">
+    <h3>Last 7 days mood</h3>
+    {% set W, H, PAD = 480, 160, 20 %}
+    {% set maxX = (checkins|length - 1) if checkins else 1 %}
+    {% set stepX = (W - 2*PAD) / (maxX if maxX>0 else 1) %}
+    {% set stepY = (H - 2*PAD) / 4 %}
+    <svg width="{{ W }}" height="{{ H }}" class="chart">
+      <!-- axes -->
+      <line x1="{{ PAD }}" y1="{{ H-PAD }}" x2="{{ W-PAD }}" y2="{{ H-PAD }}" class="axis"/>
+      <line x1="{{ PAD }}" y1="{{ PAD }}" x2="{{ PAD }}" y2="{{ H-PAD }}" class="axis"/>
+      {% for y in range(1,5) %}
+      <text x="5" y="{{ H-PAD - (y-1)*stepY }}" class="tick">{{ y }}</text>
+      {% endfor %}
+      {% if points %}
+      {% set path = [] %}
+      {% for i, mood in points %}
+        {% set x = PAD + i*stepX %}
+        {% set y = H-PAD - (mood-1)*stepY %}
+        {% set _ = path.append('{} {}'.format(x|round(2), y|round(2))) %}
+      {% endfor %}
+      <polyline points="{{ ' '.join(path) }}" class="line"/>
+      {% for i, mood in points %}
+        {% set x = PAD + i*stepX %}
+        {% set y = H-PAD - (mood-1)*stepY %}
+        <circle cx="{{ x }}" cy="{{ y }}" r="3" class="dot"/>
+      {% endfor %}
+      {% endif %}
+    </svg>
+  </div>
+  <div class="card">
+    <h3>Active Goals</h3>
+    <ul class="list">
+    {% for g in goals %}
+      <li>
+        <div>
+          <strong>{{ g['title'] }}</strong>
+          <span class="badge {{ 'done' if g['status']=='done' else 'active' }}">{{ g['status'] }}</span>
+        </div>
+        <div class="progress">
+          <div class="bar" style="width: {{ g['progress'] }}%"></div>
+        </div>
+      </li>
+    {% else %}
+      <li>No goals yet. <a href="{{ url_for('goals') }}">Add one</a>.</li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Recent Journals</h3>
+    <ul class="list">
+      {% for j in journals %}
+        <li>
+          <div class="meta">{{ j['created_at'][:16].replace('T',' ') }} · Mood {{ j['mood'] }} · Sent {{ j['sentiment'] }}</div>
+          <div>{{ j['content'] }}</div>
+        </li>
+      {% else %}
+        <li>No journals yet. <a href="{{ url_for('journal') }}">Write one</a>.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Login</h2>
+<form method="post" class="card form">
+  <label>Email</label>
+  <input type="email" name="email" required placeholder="you@example.com" value="demo@coach.app">
+  <label>Password</label>
+  <input type="password" name="password" required value="demo123">
+  <button class="btn" type="submit">Login</button>
+</form>
+<p class="small">Use the prefilled demo credentials or your own account.</p>
+{% endblock %}

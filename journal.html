@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Journal & Mood Check-in</h2>
+<form method="post" class="card form">
+  <label>How are you feeling today? (1-5)</label>
+  <input type="number" name="mood" min="1" max="5" value="3" required>
+  <label>Write your journal</label>
+  <textarea name="content" rows="5" placeholder="What's on your mind?" required></textarea>
+  <button class="btn" type="submit">Save</button>
+</form>
+
+<h3>Your Entries</h3>
+<ul class="list">
+  {% for j in journals %}
+    <li>
+      <div class="meta">{{ j['created_at'][:16].replace('T',' ') }} · Mood {{ j['mood'] }} · Sent {{ j['sentiment'] }} · Intent {{ j['intent'] }} · Keywords {{ j['keywords'] }}</div>
+      <div>{{ j['content'] }}</div>
+    </li>
+  {% else %}
+    <li>No entries yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

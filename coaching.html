@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Daily Coaching</h2>
+<p class="meta">Latest mood: {{ last_mood or 'unknown' }} · Keywords: {{ keywords|join(', ') or '—' }}</p>
+<div class="card">
+  <ol class="list">
+    {% for r in recos %}
+      <li>{{ r }}</li>
+    {% endfor %}
+  </ol>
+</div>
+{% endblock %}

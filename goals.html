@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Goals</h2>
+<form method="post" class="card form">
+  <label>Goal title</label>
+  <input type="text" name="title" required>
+  <label>Initial progress (%)</label>
+  <input type="number" name="progress" min="0" max="100" value="0">
+  <button class="btn" type="submit">Add Goal</button>
+</form>
+
+<ul class="list">
+  {% for g in goals %}
+  <li class="goal-item">
+    <div>
+      <strong>{{ g['title'] }}</strong>
+      <span class="badge {{ 'done' if g['status']=='done' else 'active' }}">{{ g['status'] }}</span>
+    </div>
+    <div class="progress">
+      <div class="bar" style="width: {{ g['progress'] }}%"></div>
+    </div>
+    <form method="post" action="{{ url_for('update_goal', goal_id=g['id']) }}" class="inline">
+      <input type="number" name="progress" min="0" max="100" value="{{ g['progress'] }}">
+      <select name="status">
+        <option value="active" {% if g['status']=='active' %}selected{% endif %}>active</option>
+        <option value="done" {% if g['status']=='done' %}selected{% endif %}>done</option>
+      </select>
+      <button class="btn btn-small" type="submit">Update</button>
+    </form>
+  </li>
+  {% else %}
+    <li>No goals yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

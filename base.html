@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Life Coach</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <h1><a href="{{ url_for('index') }}">AI Life Coach</a></h1>
+    <nav>
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('journal') }}">Journal</a>
+        <a href="{{ url_for('goals') }}">Goals</a>
+        <a href="{{ url_for('coaching') }}">Coaching</a>
+        <a href="{{ url_for('logout') }}" class="btn-link">Logout</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('register') }}" class="btn-link">Register</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+      <div class="flash">
+        {% for cat, msg in messages %}
+          <div class="flash-item {{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="container small">
+    <p>&copy; {{ 2025 }} AI Life Coach · <a href="{{ url_for('privacy') }}">Privacy</a></p>
+  </div>
+</footer>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

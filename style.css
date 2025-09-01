@@ -1,0 +1,33 @@
+:root{--bg:#0b1020;--panel:#111735;--muted:#c6c8d1;--text:#e9ebf1;--brand:#7aa2ff;--ok:#34d399;--warn:#f59e0b;--bad:#ef4444;}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,Segoe UI,Roboto,Arial}
+a{color:var(--brand);text-decoration:none} a:hover{text-decoration:underline}
+header{background:linear-gradient(90deg,#0d1530,#0a1a4a);border-bottom:1px solid #1f2a5a}
+.container{max-width:980px;margin:0 auto;padding:16px}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.nav h1 a{color:#fff}
+.nav a{margin-left:12px}
+.btn-link{background:#1d2758;padding:8px 12px;border-radius:10px}
+main{padding:24px 16px}
+.hero{text-align:center;padding:40px 0}
+.cta .btn{margin:0 6px}
+.btn{background:var(--brand);color:#09122a;border:none;border-radius:12px;padding:10px 16px;font-weight:600;cursor:pointer;display:inline-block}
+.btn:hover{filter:brightness(1.1)} .btn-secondary{background:#2b356b}
+.btn-small{padding:6px 10px;border-radius:10px}
+.card{background:var(--panel);border:1px solid #1e2a55;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+.list{list-style:disc;padding-left:20px}
+.list .meta{color:var(--muted);font-size:12px;margin-bottom:6px}
+.progress{height:10px;background:#1b244d;border-radius:999px;overflow:hidden;margin:6px 0}
+.bar{height:100%;background:linear-gradient(90deg,var(--ok),var(--brand))}
+.badge{font-size:12px;padding:2px 8px;border-radius:999px;margin-left:8px;background:#24306b}
+.badge.done{background:linear-gradient(90deg,#22c55e,#16a34a)} .badge.active{background:#334155}
+.form input,.form textarea,.inline input,.inline select{width:100%;padding:10px;border-radius:10px;border:1px solid #2a356b;background:#0e1431;color:var(--text);margin:6px 0}
+.inline{display:flex;gap:8px;align-items:center;margin-top:8px}
+.flash{display:grid;gap:6px;margin-bottom:10px}
+.flash-item{padding:8px 12px;border-radius:10px}
+.flash-item.success{background:#083e3d;color:#c7fff6;border:1px solid #0b6a65}
+.flash-item.error{background:#3a1014;color:#ffd0d4;border:1px solid #7f1d1d}
+.flash-item.info{background:#1a2452;color:#d2dcff;border:1px solid #334155}
+.chart{width:100%}.axis{stroke:#3b4ba5;stroke-width:1}.line{fill:none;stroke:#7aa2ff;stroke-width:2}.dot{fill:#7aa2ff}
+.small{font-size:13px;color:#b7bfdc}
